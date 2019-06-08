@@ -1,4 +1,4 @@
-module sysinfo
+module github.com/bingoohuang/sysinfo
 
 go 1.12
 
