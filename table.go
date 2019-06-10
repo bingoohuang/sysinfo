@@ -55,7 +55,7 @@ func (p TablePrinter) DittoMarkRows(rows []table.Row) []table.Row {
 		for j, cell := range row {
 			v, ok := mark[j]
 			if ok && v != "" && v == cell {
-				rows[i][j] = "〃"
+				rows[i][j] = p.dittoMark
 			} else {
 				mark[j] = cell
 			}
