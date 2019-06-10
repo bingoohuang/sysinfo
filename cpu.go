@@ -1,7 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"sort"
+
+	"github.com/jedib0t/go-pretty/table"
 
 	"github.com/shirou/gopsutil/cpu"
 )
@@ -13,6 +16,16 @@ type CPUInfo struct {
 	ModelName  string
 	Cores      int
 	Mhz        float64
+}
+
+func (p TablePrinter) tableCPUInfos(cpus []CPUInfo) {
+	rows := make([]table.Row, len(cpus))
+	for i, c := range cpus {
+		rows[i] = table.Row{c.PhysicalID, c.VendorID, c.Family, c.ModelName, c.Cores, c.Mhz}
+	}
+
+	p.TableRender(table.Row{"CPU PhysicalID", "VendorID", "Family", "Model Name", "Cores", "Mhz"}, rows...)
+	fmt.Println()
 }
 
 /**

@@ -8,11 +8,12 @@ import (
 
 func main() {
 	format := flag.String("format", "table", "display format json/table")
+	ditto := flag.String("ditto", "〃", "ditto mark (same as above")
 	flag.Parse()
 
 	switch *format {
 	case "table":
-		printTable()
+		printTable(*ditto)
 	case "json":
 		fallthrough
 	default:

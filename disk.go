@@ -3,55 +3,31 @@ package main
 import (
 	"fmt"
 
+	"github.com/jedib0t/go-pretty/table"
+
 	"github.com/docker/go-units"
 	"github.com/shirou/gopsutil/disk"
 )
 
 type DiskInfo struct {
-	Path   string
-	Device string
-	Fstype string
-	//DriveType   string
-	//Vendor      string
-	//Partitions  string
+	Path        string
+	Device      string
+	Fstype      string
 	Total       string
 	Used        string
 	Free        string
 	UsedPercent string
 }
 
-//func placeholder(s string) string {
-//	if s == "" {
-//		return "N/A"
-//	}
-//	return s
-//}
+func (p TablePrinter) tableDiskInfos(ds []DiskInfo) {
+	rows := make([]table.Row, len(ds))
+	for i, c := range ds {
+		rows[i] = table.Row{i + 1, c.Device, c.Path, c.Fstype, c.Total, c.Used, c.Free, c.UsedPercent}
+	}
 
-//
-//func GetDiskInfos2() ([]DiskInfo, error) {
-//	block, err := ghw.Block()
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//	diskInfos := make([]DiskInfo, len(block.Disks))
-//	f := func(p *ghw.Partition) string {
-//		return p.Name + " " + units.BytesSize(float64(p.SizeBytes)) + " " +
-//			placeholder(p.Label) + " " + placeholder(p.MountPoint)
-//	}
-//	for i, disk := range block.Disks {
-//		diskInfos[i] = DiskInfo{
-//			Name:       disk.Name,
-//			DriveType:  disk.DriveType.String(),
-//			Vendor:     disk.Vendor,
-//			Partitions: strings.Join(funk.Map(disk.Partitions, f).([]string), "\n"),
-//			Total:      units.BytesSize(float64(disk.SizeBytes)),
-//		}
-//
-//	}
-//
-//	return diskInfos, nil
-//}
+	p.TableRender(table.Row{"#", "Device", "Path", "Fstype", "Disk Total", "Disk Used", "Disk Free", "Disk Used"}, rows...)
+	fmt.Println()
+}
 
 func GetDiskInfos() ([]DiskInfo, error) {
 	stats, err := disk.Partitions(false)
