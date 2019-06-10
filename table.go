@@ -65,10 +65,9 @@ func tableDiskInfos(info SysInfo) {
 func tableCPUInfos(info SysInfo) {
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)
-	t.AppendHeader(table.Row{
-		"CPU", "VendorID", "Family", "Model Name", "Cores", "Speed"})
+	t.AppendHeader(table.Row{"CPU PhysicalID", "VendorID", "Family", "Model Name", "Cores", "Mhz"})
 	for _, c := range info.CPUInfos {
-		t.AppendRow(table.Row{c.IndexNumber, c.VendorID, c.Family, c.ModelName, c.Cores, c.Speed})
+		t.AppendRow(table.Row{c.PhysicalID, c.VendorID, c.Family, c.ModelName, c.Cores, c.Mhz})
 	}
 	t.Render()
 }
