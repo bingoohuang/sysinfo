@@ -3,7 +3,10 @@ package main
 import (
 	"fmt"
 	"os"
+	"reflect"
+	"regexp"
 
+	"github.com/bingoohuang/gou"
 	"github.com/jedib0t/go-pretty/table"
 )
 
@@ -14,43 +17,74 @@ type TablePrinter struct {
 func printTable(dittoMark string) {
 	info := GetSysInfo()
 
-	printer := TablePrinter{dittoMark: dittoMark}
-	printer.tableHost(info.HostInfo)
-	printer.tableMem(info.MemInfo)
-	printer.tableCPUInfos(info.CPUInfos)
-	printer.tableDiskInfos(info.DiskInfos)
-	printer.tableInterfInfos(info.InterfInfos)
-	printer.tableErrors(info.Errors)
+	p := TablePrinter{dittoMark: dittoMark}
+	p.table(info.HostInfo)
+	p.table(info.MemInfo)
+	p.table(info.CPUInfos)
+	p.table(info.DiskInfos)
+	p.table(info.InterfInfos)
+	p.table(info.Errors)
 }
 
-func (p TablePrinter) tableErrors(errs []string) {
-	if len(errs) == 0 {
+func (p TablePrinter) table(value interface{}) {
+	v := reflect.ValueOf(value)
+	header := make(table.Row, 0)
+	rows := make([]table.Row, 0)
+	header = append(header, "#")
+
+	switch v.Kind() {
+	case reflect.Struct:
+		fields := gou.CachedStructFields(v.Type(), "header")
+		createHeader(fields, &header)
+		createRow(fields, 0, v, &rows)
+	case reflect.Slice:
+		if v.Len() == 0 {
+			return
+		}
+
+		fields := gou.CachedStructFields(v.Type().Elem(), "header")
+		createHeader(fields, &header)
+		for i := 0; i < v.Len(); i++ {
+			createRow(fields, i, v.Index(i), &rows)
+		}
+	default:
 		return
 	}
 
-	rows := make([]table.Row, len(errs))
-	for i, c := range errs {
-		rows[i] = table.Row{i + 1, c}
-	}
-	p.TableRender(table.Row{"#", "Error"}, rows...)
+	p.tableRender(header, rows...)
 	fmt.Println()
 }
 
-func (p TablePrinter) TableRender(header table.Row, rows ...table.Row) {
+func createRow(fields []gou.StructField, rowIndex int, v reflect.Value, rows *[]table.Row) {
+	row := make(table.Row, 0)
+	row = append(row, rowIndex+1)
+	for _, f := range fields {
+		row = append(row, v.Field(f.Index).Interface())
+	}
+	*rows = append(*rows, row)
+}
+
+func createHeader(fields []gou.StructField, header *table.Row) {
+	for _, f := range fields {
+		*header = append(*header, BlankCamel(f.Name))
+	}
+}
+
+func (p TablePrinter) tableRender(header table.Row, rows ...table.Row) {
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)
 	t.AppendHeader(header)
 
 	if p.dittoMark != "" {
-		t.AppendRows(p.DittoMarkRows(rows))
+		t.AppendRows(p.dittoMarkRows(rows))
 	} else {
 		t.AppendRows(rows)
 	}
 	t.Render()
 }
 
-func (p TablePrinter) DittoMarkRows(rows []table.Row) []table.Row {
-	mark := make(map[int]interface{}, 0)
+func (p TablePrinter) dittoMarkRows(rows []table.Row) []table.Row {
+	mark := make(map[int]interface{})
 	for i, row := range rows {
 		for j, cell := range row {
 			v, ok := mark[j]
@@ -63,4 +97,9 @@ func (p TablePrinter) DittoMarkRows(rows []table.Row) []table.Row {
 	}
 
 	return rows
+}
+
+func BlankCamel(str string) string {
+	blank := regexp.MustCompile("(.)([A-Z][a-z]+)").ReplaceAllString(str, "${1} ${2}")
+	return regexp.MustCompile("([a-z0-9])([A-Z])").ReplaceAllString(blank, "${1} ${2}")
 }

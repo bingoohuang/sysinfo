@@ -2,6 +2,9 @@ package main
 
 import "runtime"
 
+type ErrorInfo struct {
+	Error string
+}
 type SysInfo struct {
 	OS          string
 	MemInfo     MemInfo
@@ -9,34 +12,34 @@ type SysInfo struct {
 	CPUInfos    []CPUInfo
 	HostInfo    HostInfo
 	InterfInfos []InterfInfo
-	Errors      []string `json:",omitempty"`
+	Errors      []ErrorInfo `json:",omitempty"`
 }
 
 func GetSysInfo() SysInfo {
-	errs := make([]string, 0)
+	errs := make([]ErrorInfo, 0)
 	diskInfos, err := GetDiskInfos()
 	if err != nil {
-		errs = append(errs, err.Error())
+		errs = append(errs, ErrorInfo{err.Error()})
 	}
 
 	mem, err := GetMemInfo()
 	if err != nil {
-		errs = append(errs, err.Error())
+		errs = append(errs, ErrorInfo{err.Error()})
 	}
 
 	cpuInfos, err := GetCPUInfo()
 	if err != nil {
-		errs = append(errs, err.Error())
+		errs = append(errs, ErrorInfo{err.Error()})
 	}
 
 	hostInfo, err := GetHostInfo()
 	if err != nil {
-		errs = append(errs, err.Error())
+		errs = append(errs, ErrorInfo{err.Error()})
 	}
 
 	interfInfos, err := GetInterInfos()
 	if err != nil {
-		errs = append(errs, err.Error())
+		errs = append(errs, ErrorInfo{err.Error()})
 	}
 
 	return SysInfo{

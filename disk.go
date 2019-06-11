@@ -3,8 +3,6 @@ package main
 import (
 	"fmt"
 
-	"github.com/jedib0t/go-pretty/table"
-
 	"github.com/docker/go-units"
 	"github.com/shirou/gopsutil/disk"
 )
@@ -17,16 +15,6 @@ type DiskInfo struct {
 	Used        string
 	Free        string
 	UsedPercent string
-}
-
-func (p TablePrinter) tableDiskInfos(ds []DiskInfo) {
-	rows := make([]table.Row, len(ds))
-	for i, c := range ds {
-		rows[i] = table.Row{i + 1, c.Device, c.Path, c.Fstype, c.Total, c.Used, c.Free, c.UsedPercent}
-	}
-
-	p.TableRender(table.Row{"#", "Device", "Path", "Fstype", "Disk Total", "Disk Used", "Disk Free", "Disk Used"}, rows...)
-	fmt.Println()
 }
 
 func GetDiskInfos() ([]DiskInfo, error) {
@@ -50,9 +38,17 @@ func GetDiskInfos() ([]DiskInfo, error) {
 			Total:       units.BytesSize(float64(diskStat.Total)),
 			Used:        units.BytesSize(float64(diskStat.Used)),
 			Free:        units.BytesSize(float64(diskStat.Free)),
-			UsedPercent: fmt.Sprintf("%.2f%%", diskStat.UsedPercent),
+			UsedPercent: formatPercent(diskStat.UsedPercent),
 		})
 	}
 
 	return diskInfos, nil
+}
+
+func formatPercent(percent float64) string {
+	up := fmt.Sprintf("%0.2f%%", percent)
+	if percent < 10 {
+		return "0" + up
+	}
+	return up
 }

@@ -1,11 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/docker/go-units"
-	"github.com/jedib0t/go-pretty/table"
 	"github.com/shirou/gopsutil/host"
 )
 
@@ -19,15 +17,6 @@ type HostInfo struct {
 	HostID          string
 	PlatformVersion string
 	KernelVersion   string
-}
-
-func (p TablePrinter) tableHost(h HostInfo) {
-	p.TableRender(table.Row{"Hostname", "Uptime", "Procs", "Host OS",
-		"Platform", "HostID", "Platform Version", "Kernel Version"},
-		table.Row{h.Hostname, fmt.Sprintf("%d(%s)", h.Uptime, h.UptimeHuman), h.Procs, h.OS,
-			h.Platform, h.HostID, h.PlatformVersion, h.KernelVersion})
-
-	fmt.Println()
 }
 
 func GetHostInfo() (HostInfo, error) {

@@ -1,10 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 
-	"github.com/jedib0t/go-pretty/table"
 	"github.com/shirou/gopsutil/net"
 	"github.com/thoas/go-funk"
 )
@@ -12,17 +10,7 @@ import (
 type InterfInfo struct {
 	InterfaceName string
 	HardwareAddr  string
-	Addrs         []string
-}
-
-func (p TablePrinter) tableInterfInfos(is []InterfInfo) {
-	rows := make([]table.Row, len(is))
-	for i, c := range is {
-		rows[i] = table.Row{i + 1, c.InterfaceName, c.HardwareAddr, strings.Join(c.Addrs, " ")}
-	}
-
-	p.TableRender(table.Row{"#", "Interface Name", "Hardware Addr", "Addrs"}, rows...)
-	fmt.Println()
+	Addrs         string
 }
 
 func GetInterInfos() ([]InterfInfo, error) {
@@ -38,10 +26,11 @@ func GetInterInfos() ([]InterfInfo, error) {
 			continue
 		}
 
+		addrs := funk.Map(interf.Addrs, func(a net.InterfaceAddr) string { return a.Addr }).([]string)
 		interfs = append(interfs, InterfInfo{
 			InterfaceName: interf.Name,
 			HardwareAddr:  interf.HardwareAddr,
-			Addrs:         funk.Map(interf.Addrs, func(a net.InterfaceAddr) string { return a.Addr }).([]string),
+			Addrs:         strings.Join(addrs, " "),
 		})
 	}
 
