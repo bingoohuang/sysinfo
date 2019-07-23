@@ -1,0 +1,42 @@
+package sysinfo
+
+import (
+	"regexp"
+	"strconv"
+
+	"github.com/bingoohuang/gou/os"
+	"github.com/bingoohuang/gou/str"
+)
+
+func PsAuxTop(n int) ([]PsAuxItem, error) {
+	auxItems := make([]PsAuxItem, 0)
+	opt := str.If(n > 0, `|head -n `+strconv.Itoa(n), ``)
+
+	re := regexp.MustCompile(`\s+`)
+	err := os.ExecuteBashLiner(prefix+opt+fixedLtime, func(line string) bool {
+		f := re.Split(line, 13)
+		auxItems = append(auxItems, PsAuxItem{
+			User: f[2], Pid: f[3], Ppid: f[4], CPU: f[5], Mem: f[6], Vsz: f[7], Rss: f[8],
+			Tty: f[9], Stat: f[10], Start: f[0] + ` ` + f[1], Time: f[11], Command: f[12]})
+		return true
+	})
+
+	return auxItems, err
+}
+
+const prefix = `(export TZ=UTC0 LC_ALL=C; ps axo lstart,user,pid,ppid,pcpu,pmem,vsz,rss,tt,stat,time,args | tail -n +2`
+
+// nolint
+const fixedLtime = `|awk '{c="date -jf \"%a %b %e %T %Y\" \""$1 FS $2 FS $3 FS $4 FS $5"\" +\047%Y-%m-%d %H:%M:%S\047"; c|getline d; close(c); $1=$2=$3=$4=$5=""; printf "%s\n",d$0 }' )`
+
+// nolint
+/*
+➜  sysinfo git:(master) ✗ (export TZ=UTC0 LC_ALL=C; ps axo lstart,user,pid,ppid,pcpu,pmem,vsz,rss,tt,stat,time,args |  head -n 3 )
+STARTED                      USER               PID  PPID  %CPU %MEM      VSZ    RSS   TT  STAT      TIME ARGS
+Mon Jul 22 01:13:22 2019     root                 1     0   0.0  0.1  4417876  13896   ??  Ss     8:44.17 /sbin/launchd
+Mon Jul 22 01:13:30 2019     root                40     1   0.0  0.0  4395956   1448   ??  Ss     0:05.95 /usr/sbin/syslogd
+➜  sysinfo git:(master) ✗ (export TZ=UTC0 LC_ALL=C;date -jf "%a %b %e %T %Y" "Mon Jul 22 01:13:22 2019" +"%Y-%m-%d %H:%M:%S")
+2019-07-22 01:13:22
+➜  sysinfo git:(master) ✗ (export TZ=UTC0 LC_ALL=C; ps axo lstart,user,pid,ppid,pcpu,pmem,vsz,rss,tt,stat,time,args | tail -n +2|head -n 1|awk '{c="date -jf \"%a %b %e %T %Y\" \""$1 FS $2 FS $3 FS $4 FS $5"\" +\047%Y-%m-%d %H:%M:%S\047"; c|getline d; close(c); $1=$2=$3=$4=$5=""; printf "%s\n",d$0 }' )
+2019-07-22 01:13:22     root 1 0 0.1 0.1 4418400 13912 ?? Ss 8:56.17 /sbin/launchd
+*/

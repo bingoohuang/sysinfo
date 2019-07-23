@@ -12,6 +12,7 @@ type SysInfo struct {
 	CPUInfos    []CPUInfo
 	HostInfo    HostInfo
 	InterfInfos []InterfInfo
+	PsItems     []PsAuxItem
 	Errors      []ErrorInfo `json:",omitempty"`
 }
 
@@ -42,6 +43,11 @@ func GetSysInfo() SysInfo {
 		errs = append(errs, ErrorInfo{err.Error()})
 	}
 
+	psItems, err := PsAuxTop(0)
+	if err != nil {
+		errs = append(errs, ErrorInfo{err.Error()})
+	}
+
 	return SysInfo{
 		OS:          runtime.GOOS,
 		MemInfo:     mem,
@@ -49,6 +55,7 @@ func GetSysInfo() SysInfo {
 		CPUInfos:    cpuInfos,
 		HostInfo:    hostInfo,
 		InterfInfos: interfInfos,
+		PsItems:     psItems,
 		Errors:      errs,
 	}
 }

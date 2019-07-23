@@ -23,6 +23,7 @@ func PrintTable(dittoMark string) {
 	p.table(info.CPUInfos)
 	p.table(info.DiskInfos)
 	p.table(info.InterfInfos)
+	p.table(info.PsItems)
 	p.table(info.Errors)
 }
 
