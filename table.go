@@ -1,4 +1,4 @@
-package main
+package sysinfo
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"regexp"
 
-	"github.com/bingoohuang/gou"
+	"github.com/bingoohuang/gou/reflec"
 	"github.com/jedib0t/go-pretty/table"
 )
 
@@ -14,7 +14,7 @@ type TablePrinter struct {
 	dittoMark string
 }
 
-func printTable(dittoMark string) {
+func PrintTable(dittoMark string) {
 	info := GetSysInfo()
 
 	p := TablePrinter{dittoMark: dittoMark}
@@ -34,7 +34,7 @@ func (p TablePrinter) table(value interface{}) {
 
 	switch v.Kind() {
 	case reflect.Struct:
-		fields := gou.CachedStructFields(v.Type(), "header")
+		fields := reflec.CachedStructFields(v.Type(), "header")
 		createHeader(fields, &header)
 		createRow(fields, 0, v, &rows)
 	case reflect.Slice:
@@ -42,7 +42,7 @@ func (p TablePrinter) table(value interface{}) {
 			return
 		}
 
-		fields := gou.CachedStructFields(v.Type().Elem(), "header")
+		fields := reflec.CachedStructFields(v.Type().Elem(), "header")
 		createHeader(fields, &header)
 		for i := 0; i < v.Len(); i++ {
 			createRow(fields, i, v.Index(i), &rows)
@@ -55,7 +55,7 @@ func (p TablePrinter) table(value interface{}) {
 	fmt.Println()
 }
 
-func createRow(fields []gou.StructField, rowIndex int, v reflect.Value, rows *[]table.Row) {
+func createRow(fields []reflec.StructField, rowIndex int, v reflect.Value, rows *[]table.Row) {
 	row := make(table.Row, 0)
 	row = append(row, rowIndex+1)
 	for _, f := range fields {
@@ -64,7 +64,7 @@ func createRow(fields []gou.StructField, rowIndex int, v reflect.Value, rows *[]
 	*rows = append(*rows, row)
 }
 
-func createHeader(fields []gou.StructField, header *table.Row) {
+func createHeader(fields []reflec.StructField, header *table.Row) {
 	for _, f := range fields {
 		*header = append(*header, BlankCamel(f.Name))
 	}
