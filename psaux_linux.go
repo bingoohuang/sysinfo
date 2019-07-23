@@ -16,7 +16,8 @@ func PsAuxTop(n int) ([]PsAuxItem, error) {
 	err := os.ExecuteBashLiner(prefix+opt+fixedLtime, func(line string) bool {
 		f := re.Split(line, 13)
 		auxItems = append(auxItems, PsAuxItem{
-			User: f[2], Pid: f[3], Ppid: f[4], CPU: f[5], Mem: f[6], Vsz: f[7], Rss: f[8],
+			User: f[2], Pid: str.ParseInt(f[3]), Ppid: str.ParseInt(f[4]), CPU: str.ParseFloat32(f[5]),
+			Mem: str.ParseFloat32(f[6]), Vsz: str.ParseInt(f[7]), Rss: str.ParseInt(f[8]),
 			Tty: f[9], Stat: f[10], Start: f[0] + ` ` + f[1], Time: f[11], Command: f[12]})
 		return true
 	})
