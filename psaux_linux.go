@@ -31,6 +31,7 @@ const fixedLtime = `|awk '{c="date -d\""$1 FS $2 FS $3 FS $4 FS $5"\" +\047%Y-%m
 
 // nolint
 /*
+https://unix.stackexchange.com/questions/401785/ps-output-with-iso-date-format
 [root@fs04-192-168-126-5 ~]# ps axo lstart,user,pid,ppid,pcpu,pmem,vsz,rss,tname,stat,time,args --no-heading
 Fri Jul  5 07:12:47 2019 root         1     0  0.0  0.0 194164  7268 ?        Ss   00:00:23 /usr/lib/systemd/systemd --switched-root --system --deserialize 22
 Fri Jul  5 07:12:47 2019 root         2     0  0.0  0.0      0     0 ?        S    00:00:00 [kthreadd]

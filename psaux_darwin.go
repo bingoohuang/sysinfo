@@ -31,6 +31,7 @@ const fixedLtime = `|awk '{c="date -jf \"%a %b %e %T %Y\" \""$1 FS $2 FS $3 FS $
 
 // nolint
 /*
+https://unix.stackexchange.com/questions/115736/unable-to-use-date-command-to-change-specific-date-format-in-bash-shell-on-os-x
 ➜  sysinfo git:(master) ✗ (export TZ=UTC0 LC_ALL=C; ps axo lstart,user,pid,ppid,pcpu,pmem,vsz,rss,tt,stat,time,args |  head -n 3 )
 STARTED                      USER               PID  PPID  %CPU %MEM      VSZ    RSS   TT  STAT      TIME ARGS
 Mon Jul 22 01:13:22 2019     root                 1     0   0.0  0.1  4417876  13896   ??  Ss     8:44.17 /sbin/launchd
