@@ -1,28 +1,13 @@
 package sysinfo
 
 import (
-	"regexp"
 	"strconv"
 
-	"github.com/bingoohuang/gou/os"
 	"github.com/bingoohuang/gou/str"
 )
 
-func PsAuxTop(n int) ([]PsAuxItem, error) {
-	auxItems := make([]PsAuxItem, 0)
-	opt := str.If(n > 0, `--sort=-pcpu|head -n `+strconv.Itoa(n), `--sort=-pid --forest`)
-
-	re := regexp.MustCompile(`\s+`)
-	err := os.ExecuteBashLiner(prefix+opt+fixedLtime, func(line string) bool {
-		f := re.Split(line, 13)
-		auxItems = append(auxItems, PsAuxItem{
-			User: f[2], Pid: str.ParseInt(f[3]), Ppid: str.ParseInt(f[4]), CPU: str.ParseFloat32(f[5]),
-			Mem: str.ParseFloat32(f[6]), Vsz: str.ParseInt(f[7]), Rss: str.ParseInt(f[8]),
-			Tty: f[9], Stat: f[10], Start: f[0] + ` ` + f[1], Time: f[11], Command: f[12]})
-		return true
-	})
-
-	return auxItems, err
+func psAuxTopOpt(n int) {
+	return str.If(n > 0, `--sort=-pcpu|head -n `+strconv.Itoa(n), `--sort=-pid --forest`)
 }
 
 const prefix = `ps axo lstart,user,pid,ppid,pcpu,pmem,vsz,rss,tname,stat,time,args --no-heading `

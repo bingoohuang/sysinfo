@@ -1,3 +1,4 @@
+github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d h1:G0m3OIz70MZUWq3EgK3CesDbo8upS2Vm9/P3FtgI+Jk=
 github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d/go.mod h1:3eOhrUMpNV+6aFIbp5/iudMxNCF27Vw2OZgy4xEx0Fg=
@@ -11,10 +12,8 @@ github.com/averagesecurityguy/random v0.0.0-20180326012618-37cce341d2af/go.mod h
 github.com/bingoohuang/gonet v0.0.0-20190716021716-fd516efe8b31/go.mod h1:lSe5gMXAiQESg/xTshM6sByKvDkMGdDffZSXt0d64JI=
 github.com/bingoohuang/goreflect v0.0.0-20190712052741-f9e6d0b5f7fd h1:horohKpjOxu/ZiHUzDhMbfoUgthbXoiCEI2SvWkOVL4=
 github.com/bingoohuang/goreflect v0.0.0-20190712052741-f9e6d0b5f7fd/go.mod h1:rga5AtVf7Npiv04XZxTsd8LC4/VyEHr+sn4Vt1jWPNE=
-github.com/bingoohuang/gou v0.0.0-20190722015818-5434114efdb2 h1:wEmU5Fad1BwvRMP9LLC1I37fjLKqZFjBGjhQFOUkI+A=
-github.com/bingoohuang/gou v0.0.0-20190722015818-5434114efdb2/go.mod h1:IwDSBuQaCMAmPkxq4/bmaJSaJTBLa+kbU9K9VEOWxEU=
-github.com/bingoohuang/gou v0.0.0-20190723093603-5c699b946809 h1:tMPmNQDBo/fBbBy7D7bPeq41kBeJfwwREymq/Z9rOgY=
-github.com/bingoohuang/gou v0.0.0-20190723093603-5c699b946809/go.mod h1:IwDSBuQaCMAmPkxq4/bmaJSaJTBLa+kbU9K9VEOWxEU=
+github.com/bingoohuang/gou v0.0.0-20190724014721-0bd59a7f74d8 h1:bXJtnyS2UYt44hmRxLWkR1w6FoDL68pLUNZNLw3okM0=
+github.com/bingoohuang/gou v0.0.0-20190724014721-0bd59a7f74d8/go.mod h1:IwDSBuQaCMAmPkxq4/bmaJSaJTBLa+kbU9K9VEOWxEU=
 github.com/bingoohuang/strcase v0.0.0-20190707081139-fae4a99e1218 h1:7Ku6SM7mXEOq+lUrjebiW94aED5tCTifP56HTNrWN3M=
 github.com/bingoohuang/strcase v0.0.0-20190707081139-fae4a99e1218/go.mod h1:WYrcjWhT2QgbWZcYzfYqWxaxut2hPFa6if/zYwEEEio=
 github.com/darkgopher/dark v0.0.0-20170224201535-cf742fb983cd/go.mod h1:SYwg8Os6cs59oG7X6auHuPD8AJwJ60EmJd9YsuNF61g=
@@ -112,4 +111,5 @@ gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 h1:qIbj1fsPNlZgppZ+VLlY7N33
 gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/go-playground/assert.v1 v1.2.1/go.mod h1:9RXL0bg/zibRAgZUYszZSwO/z8Y/a8bDuhia5mkpMnE=
 gopkg.in/go-playground/validator.v8 v8.18.2/go.mod h1:RX2a/7Ha8BgOhfk7j780h4/u/RRjR0eouCJSH80/M2Y=
+gopkg.in/yaml.v2 v2.2.2 h1:ZCJp+EgiOT7lHqUV2J862kp8Qj64Jo6az82+3Td9dZw=
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
