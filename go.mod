@@ -4,7 +4,8 @@ go 1.12
 
 require (
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/bingoohuang/gou v0.0.0-20190724014721-0bd59a7f74d8
+	github.com/bingoohuang/cmd v1.0.5
+	github.com/bingoohuang/gou v0.0.0-20190724062522-59c35e658334
 	github.com/docker/go-units v0.4.0
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/go-openapi/strfmt v0.19.0 // indirect

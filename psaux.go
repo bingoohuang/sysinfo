@@ -3,7 +3,7 @@ package sysinfo
 import (
 	"regexp"
 
-	"github.com/bingoohuang/gou/o"
+	"github.com/bingoohuang/cmd"
 	"github.com/bingoohuang/gou/str"
 	"github.com/docker/go-units"
 )
@@ -28,7 +28,7 @@ func PsAuxTop(n int) ([]PsAuxItem, error) {
 	opt := psAuxTopOpt(n)
 
 	re := regexp.MustCompile(`\s+`)
-	err := o.ExecuteBashLiner(prefix+opt+fixedLtime, func(line string) bool {
+	_, status := cmd.BashLiner(prefix+opt+fixedLtime, func(line string) bool {
 		f := re.Split(line, 13)
 		auxItems = append(auxItems, PsAuxItem{
 			User:    f[2],
@@ -46,5 +46,5 @@ func PsAuxTop(n int) ([]PsAuxItem, error) {
 		return true
 	})
 
-	return auxItems, err
+	return auxItems, status.Error
 }
