@@ -8,7 +8,8 @@ import (
 
 func psAuxTopOpt(n int) string { return str.If(n > 0, `|head -n `+strconv.Itoa(n), ``) }
 
-const prefix = `(export TZ=UTC0 LC_ALL=C; ps axo lstart,user,pid,ppid,pcpu,pmem,vsz,rss,tt,stat,time,args | tail -n +2`
+const prefix = `(export TZ=UTC0 LC_ALL=C; ps axo lstart,user,pid,ppid,pcpu,pmem,vsz,rss,tt,stat,time,args`
+const noheading = `|tail -n +2`
 
 // nolint
 const fixedLtime = `|awk '{c="date -jf \"%a %b %e %T %Y\" \""$1 FS $2 FS $3 FS $4 FS $5"\" +\047%Y-%m-%d %H:%M:%S\047"; c|getline d; close(c); $1=$2=$3=$4=$5=""; printf "%s\n",d$0 }' )`

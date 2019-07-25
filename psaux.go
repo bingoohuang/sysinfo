@@ -26,7 +26,7 @@ type PsAuxItem struct {
 func PsAuxTop(n int) ([]PsAuxItem, error) {
 	auxItems := make([]PsAuxItem, 0)
 	re := regexp.MustCompile(`\s+`)
-	_, status := cmd.BashLiner(PasAuxShell(n), func(line string) bool {
+	_, status := cmd.BashLiner(PasAuxShell(n, false), func(line string) bool {
 		f := re.Split(line, 13)
 		auxItems = append(auxItems, PsAuxItem{
 			User:    f[2],
@@ -47,6 +47,6 @@ func PsAuxTop(n int) ([]PsAuxItem, error) {
 	return auxItems, status.Error
 }
 
-func PasAuxShell(topN int) string {
-	return prefix + psAuxTopOpt(topN) + fixedLtime
+func PasAuxShell(topN int, heading bool) string {
+	return prefix + str.If(heading, "", noheading) + psAuxTopOpt(topN) + fixedLtime
 }
