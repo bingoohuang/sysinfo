@@ -11,13 +11,13 @@ type MemInfo struct {
 	UsedPercentage string
 }
 
-func GetMemInfo() (MemInfo, error) {
+func GetMemInfo() (*MemInfo, error) {
 	vmStat, err := mem.VirtualMemory()
 	if err != nil {
-		return MemInfo{}, err
+		return nil, err
 	}
 
-	return MemInfo{
+	return &MemInfo{
 		Total:          units.BytesSize(float64(vmStat.Total)),
 		Free:           units.BytesSize(float64(vmStat.Free)),
 		UsedPercentage: formatPercent(vmStat.UsedPercent),

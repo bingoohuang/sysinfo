@@ -14,10 +14,11 @@ type TablePrinter struct {
 	dittoMark string
 }
 
-func PrintTable(dittoMark string) {
-	info := GetSysInfo()
+func PrintTable(showsMap map[string]bool, dittoMark string) {
+	info := GetSysInfo(showsMap)
 
 	p := TablePrinter{dittoMark: dittoMark}
+
 	p.table(info.HostInfo)
 	p.table(info.MemInfo)
 	p.table(info.CPUInfos)
@@ -34,7 +35,14 @@ func (p TablePrinter) table(value interface{}) {
 	header = append(header, "#")
 
 	v := reflect.ValueOf(value)
+	if v.IsNil() {
+		return
+	}
+
 	switch v.Kind() {
+	case reflect.Ptr:
+		v = v.Elem()
+		fallthrough
 	case reflect.Struct:
 		fields := reflec.CachedStructFields(v.Type(), "header")
 		createHeader(fields, &header)

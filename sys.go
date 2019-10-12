@@ -7,56 +7,58 @@ type ErrorInfo struct {
 }
 type SysInfo struct {
 	OS          string
-	MemInfo     MemInfo
+	MemInfo     *MemInfo
 	DiskInfos   []DiskInfo
 	CPUInfos    []CPUInfo
-	HostInfo    HostInfo
+	HostInfo    *HostInfo
 	InterfInfos []InterfInfo
 	PsItems     []PsAuxItem
 	Errors      []ErrorInfo `json:",omitempty"`
 }
 
-func GetSysInfo() SysInfo {
+func GetSysInfo(showsMap map[string]bool) SysInfo {
+	var err error
+
 	errs := make([]ErrorInfo, 0)
-	diskInfos, err := GetDiskInfos()
+	si := SysInfo{OS: runtime.GOOS}
 
-	if err != nil {
-		errs = append(errs, ErrorInfo{err.Error()})
+	if _, ok := showsMap["disk"]; ok {
+		if si.DiskInfos, err = GetDiskInfos(); err != nil {
+			errs = append(errs, ErrorInfo{err.Error()})
+		}
 	}
 
-	mem, err := GetMemInfo()
-	if err != nil {
-		errs = append(errs, ErrorInfo{err.Error()})
+	if _, ok := showsMap["mem"]; ok {
+		if si.MemInfo, err = GetMemInfo(); err != nil {
+			errs = append(errs, ErrorInfo{err.Error()})
+		}
 	}
 
-	cpuInfos, err := GetCPUInfo()
-	if err != nil {
-		errs = append(errs, ErrorInfo{err.Error()})
+	if _, ok := showsMap["cpu"]; ok {
+		if si.CPUInfos, err = GetCPUInfo(); err != nil {
+			errs = append(errs, ErrorInfo{err.Error()})
+		}
 	}
 
-	hostInfo, err := GetHostInfo()
-	if err != nil {
-		errs = append(errs, ErrorInfo{err.Error()})
+	if _, ok := showsMap["host"]; ok {
+		if si.HostInfo, err = GetHostInfo(); err != nil {
+			errs = append(errs, ErrorInfo{err.Error()})
+		}
 	}
 
-	interfInfos, err := GetInterInfos()
-	if err != nil {
-		errs = append(errs, ErrorInfo{err.Error()})
+	if _, ok := showsMap["interf"]; ok {
+		if si.InterfInfos, err = GetInterInfos(); err != nil {
+			errs = append(errs, ErrorInfo{err.Error()})
+		}
 	}
 
-	psItems, err := PsAuxTop(0)
-	if err != nil {
-		errs = append(errs, ErrorInfo{err.Error()})
+	if _, ok := showsMap["ps"]; ok {
+		if si.PsItems, err = PsAuxTop(0); err != nil {
+			errs = append(errs, ErrorInfo{err.Error()})
+		}
 	}
 
-	return SysInfo{
-		OS:          runtime.GOOS,
-		MemInfo:     mem,
-		DiskInfos:   diskInfos,
-		CPUInfos:    cpuInfos,
-		HostInfo:    hostInfo,
-		InterfInfos: interfInfos,
-		PsItems:     psItems,
-		Errors:      errs,
-	}
+	si.Errors = errs
+
+	return si
 }

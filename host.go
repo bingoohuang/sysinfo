@@ -19,14 +19,14 @@ type HostInfo struct {
 	KernelVersion   string
 }
 
-func GetHostInfo() (HostInfo, error) {
+func GetHostInfo() (*HostInfo, error) {
 	// host or machine kernel, uptime, platform Info
 	hostStat, err := host.Info()
 	if err != nil {
-		return HostInfo{}, err
+		return nil, err
 	}
 
-	return HostInfo{
+	return &HostInfo{
 		Hostname:        hostStat.Hostname,
 		Uptime:          hostStat.Uptime,
 		UptimeHuman:     units.HumanDuration(time.Duration(hostStat.Uptime) * time.Second),
