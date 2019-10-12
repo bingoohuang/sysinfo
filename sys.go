@@ -19,6 +19,7 @@ type SysInfo struct {
 func GetSysInfo() SysInfo {
 	errs := make([]ErrorInfo, 0)
 	diskInfos, err := GetDiskInfos()
+
 	if err != nil {
 		errs = append(errs, ErrorInfo{err.Error()})
 	}

@@ -21,12 +21,14 @@ func GetInterInfos() ([]InterfInfo, error) {
 	}
 
 	interfs := make([]InterfInfo, 0, len(interfStats))
+
 	for _, interf := range interfStats {
 		if interf.HardwareAddr == "" || len(interf.Addrs) == 0 {
 			continue
 		}
 
 		addrs := funk.Map(interf.Addrs, func(a net.InterfaceAddr) string { return a.Addr }).([]string)
+
 		interfs = append(interfs, InterfInfo{
 			InterfaceName: interf.Name,
 			HardwareAddr:  interf.HardwareAddr,

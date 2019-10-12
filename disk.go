@@ -47,8 +47,10 @@ func GetDiskInfos() ([]DiskInfo, error) {
 
 func formatPercent(percent float64) string {
 	up := fmt.Sprintf("%0.2f%%", percent)
+
 	if percent < 10 {
 		return "0" + up
 	}
+
 	return up
 }

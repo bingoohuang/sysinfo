@@ -28,11 +28,12 @@ func PrintTable(dittoMark string) {
 }
 
 func (p TablePrinter) table(value interface{}) {
-	v := reflect.ValueOf(value)
 	header := make(table.Row, 0)
 	rows := make([]table.Row, 0)
+
 	header = append(header, "#")
 
+	v := reflect.ValueOf(value)
 	switch v.Kind() {
 	case reflect.Struct:
 		fields := reflec.CachedStructFields(v.Type(), "header")
@@ -45,6 +46,7 @@ func (p TablePrinter) table(value interface{}) {
 
 		fields := reflec.CachedStructFields(v.Type().Elem(), "header")
 		createHeader(fields, &header)
+
 		for i := 0; i < v.Len(); i++ {
 			createRow(fields, i, v.Index(i), &rows)
 		}
@@ -59,9 +61,11 @@ func (p TablePrinter) table(value interface{}) {
 func createRow(fields []reflec.StructField, rowIndex int, v reflect.Value, rows *[]table.Row) {
 	row := make(table.Row, 0)
 	row = append(row, rowIndex+1)
+
 	for _, f := range fields {
 		row = append(row, v.Field(f.Index).Interface())
 	}
+
 	*rows = append(*rows, row)
 }
 
@@ -81,11 +85,13 @@ func (p TablePrinter) tableRender(header table.Row, rows ...table.Row) {
 	} else {
 		t.AppendRows(rows)
 	}
+
 	t.Render()
 }
 
 func (p TablePrinter) dittoMarkRows(rows []table.Row) []table.Row {
 	mark := make(map[int]interface{})
+
 	for i, row := range rows {
 		for j, cell := range row {
 			v, ok := mark[j]
