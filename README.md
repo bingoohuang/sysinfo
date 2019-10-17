@@ -149,3 +149,40 @@ $ ./sysinfo
 1. https://github.com/zcalusic/sysinfo
 1. https://github.com/jaypipes/ghw
 1. [goreleaser](https://goreleaser.com/)
+
+## goreleaser usage
+
+```bash
+# clone it outside GOPATH
+git clone https://github.com/goreleaser/goreleaser
+cd goreleaser
+
+# get dependencies using go modules (needs go 1.11+)
+go get ./...
+
+# build
+go install
+
+# check it works
+goreleaser --version
+
+# Run goreleaser init to create an example .goreleaser.yaml file:
+goreleaser init
+
+# test the configuration at any time
+goreleaser --snapshot --skip-publish --rm-dist
+
+#  export either a GITHUB_TOKEN or GITLAB_TOKEN environment variable, 
+#  which should contain a valid GitHub token with the repo scope or GitLab token with api scope. 
+#  It will be used to deploy releases to your GitHub/GitLab repository.
+export GITHUB_TOKEN="YOUR_GH_TOKEN"
+# or
+export GITLAB_TOKEN="YOUR_GL_TOKEN"
+
+# GoReleaser will use the latest Git tag of your repository. Create a tag and push it to GitHub:
+$ git tag -a v0.1.0 -m "First release"
+$ git push origin v0.1.0
+
+# run GoReleaser at the root of your repository:
+goreleaser --rm-dist
+```
