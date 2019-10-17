@@ -8,18 +8,20 @@ a command to show the system info as full as possible
 ## usage: 
 
 ```bash
-➜  sysinfo git:(master) ✗ ./sysinfo -h
-Usage of ./sysinfo:
+➜  sysinfo -h
+Usage of sysinfo:
   -ditto string
     	ditto mark (same as above (default "\"")
   -format string
     	display format json/table (default "table")
+  -show string
+    	only show specified info(host,mem,cpu,disk,interf,ps) (default "host,mem,cpu,disk,interf")
 ```
 
 ## demo:
 
 ```bash
-➜  sysinfo git:(master) sysinfo
+➜  sysinfo
 +---+----------+--------+--------------+-------+--------+----------+--------------------------------------+------------------+----------------+
 | # | HOSTNAME | UPTIME | UPTIME HUMAN | PROCS | OS     | PLATFORM | HOST ID                              | PLATFORM VERSION | KERNEL VERSION |
 +---+----------+--------+--------------+-------+--------+----------+--------------------------------------+------------------+----------------+
@@ -56,8 +58,7 @@ Usage of ./sysinfo:
 ```
 
 ```bash
-Last login: Mon Jun 10 16:10:25 2019 from 192.168.218.9
-[root@BJCA-device ~]# ./sysinfo 
+# ./sysinfo 
 +---+-------------+---------+--------------+-------+-------+-------------+--------------------------------------+------------------+-----------------------+
 | # | HOSTNAME    |  UPTIME | UPTIME HUMAN | PROCS | OS    | PLATFORM    | HOST ID                              | PLATFORM VERSION | KERNEL VERSION        |
 +---+-------------+---------+--------------+-------+-------+-------------+--------------------------------------+------------------+-----------------------+
@@ -91,7 +92,7 @@ Last login: Mon Jun 10 16:10:25 2019 from 192.168.218.9
 ```
 
 ```bash
-[footstone@fs01-192-168-126-182 ~]$ ./sysinfo 
+$ ./sysinfo 
 +---+----------------------+---------+--------------+-------+-------+----------+--------------------------------------+------------------+-----------------------+
 | # | HOSTNAME             |  UPTIME | UPTIME HUMAN | PROCS | OS    | PLATFORM | HOST ID                              | PLATFORM VERSION | KERNEL VERSION        |
 +---+----------------------+---------+--------------+-------+-------+----------+--------------------------------------+------------------+-----------------------+
@@ -147,3 +148,4 @@ Last login: Mon Jun 10 16:10:25 2019 from 192.168.218.9
 1. https://github.com/jedib0t/go-pretty
 1. https://github.com/zcalusic/sysinfo
 1. https://github.com/jaypipes/ghw
+1. [goreleaser](https://goreleaser.com/)
