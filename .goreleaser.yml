@@ -7,16 +7,16 @@ before:
     # you may remove this if you don't need go generate
     - go generate ./...
 builds:
-  - main: ./cmd/sysinfo/main.go
+  -
+    main: ./cmd/sysinfo/main.go
+    hooks:
+      post: upx --brute dist/sysinfo*/sysinfo
 env:
   - CGO_ENABLED=0
 archives:
 - replacements:
     darwin: Darwin
     linux: Linux
-    windows: Windows
-    386: i386
-    amd64: x86_64
 checksum:
   name_template: 'checksums.txt'
 snapshot:
