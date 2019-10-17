@@ -186,3 +186,12 @@ $ git push origin v0.1.0
 # run GoReleaser at the root of your repository:
 goreleaser --rm-dist
 ```
+
+## [how to delete a git tag locally and remote](https://gist.github.com/mobilemind/7883996)
+
+```bash
+# delete local tag v0.1.0
+git tag -d v0.1.0
+# delete remote tag v0.1.0 (eg, GitHub version too)
+git push --delete origin v0.1.0
+```
