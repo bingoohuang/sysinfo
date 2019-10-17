@@ -9,13 +9,9 @@ github.com/asaskevich/govalidator v0.0.0-20180720115003-f9ffefc3facf h1:eg0MeVzs
 github.com/asaskevich/govalidator v0.0.0-20180720115003-f9ffefc3facf/go.mod h1:lB+ZfQJz7igIIfQNfa7Ml4HSf2uFQQRzpGGRXenZAgY=
 github.com/averagesecurityguy/random v0.0.0-20180326012618-37cce341d2af h1:P1psVDaUckBRYLjODu1JLr/ECxWPWwYrbEaa5g7IqSM=
 github.com/averagesecurityguy/random v0.0.0-20180326012618-37cce341d2af/go.mod h1:xlqW8P0gOqVMB8Kp0mMuUznEi1PzjF+mhHTSC+ymalU=
-github.com/bingoohuang/cmd v1.0.5 h1:QC8SKZ73Y8b530fWkvAaWXiVeKYn6pFOA02joxzEoig=
-github.com/bingoohuang/cmd v1.0.5/go.mod h1:qF/gREqKSPmmDWjL4XkrlNe2hlzu2GtMakwG1SXWEwI=
 github.com/bingoohuang/gonet v0.0.0-20190716021716-fd516efe8b31/go.mod h1:lSe5gMXAiQESg/xTshM6sByKvDkMGdDffZSXt0d64JI=
 github.com/bingoohuang/goreflect v0.0.0-20190712052741-f9e6d0b5f7fd h1:horohKpjOxu/ZiHUzDhMbfoUgthbXoiCEI2SvWkOVL4=
 github.com/bingoohuang/goreflect v0.0.0-20190712052741-f9e6d0b5f7fd/go.mod h1:rga5AtVf7Npiv04XZxTsd8LC4/VyEHr+sn4Vt1jWPNE=
-github.com/bingoohuang/gou v0.0.0-20190724014721-0bd59a7f74d8 h1:bXJtnyS2UYt44hmRxLWkR1w6FoDL68pLUNZNLw3okM0=
-github.com/bingoohuang/gou v0.0.0-20190724014721-0bd59a7f74d8/go.mod h1:IwDSBuQaCMAmPkxq4/bmaJSaJTBLa+kbU9K9VEOWxEU=
 github.com/bingoohuang/gou v0.0.0-20190724062522-59c35e658334 h1:iylmmFpBCcua3COQtceWDnbEr5mu57jFowGpEXV/jX0=
 github.com/bingoohuang/gou v0.0.0-20190724062522-59c35e658334/go.mod h1:IwDSBuQaCMAmPkxq4/bmaJSaJTBLa+kbU9K9VEOWxEU=
 github.com/bingoohuang/strcase v0.0.0-20190707081139-fae4a99e1218 h1:7Ku6SM7mXEOq+lUrjebiW94aED5tCTifP56HTNrWN3M=
@@ -40,6 +36,8 @@ github.com/go-openapi/strfmt v0.19.0 h1:0Dn9qy1G9+UJfRU7TR8bmdGxb4uifB7HNrJjOnV0
 github.com/go-openapi/strfmt v0.19.0/go.mod h1:+uW+93UVvGGq2qGaZxdDeJqSAqBqBdl+ZPMF/cC8nDY=
 github.com/go-test/deep v1.0.2 h1:onZX1rnHT3Wv6cqNgYyFOOlgVKJrksuCMCRvJStbMYw=
 github.com/go-test/deep v1.0.2/go.mod h1:wGDj63lr65AM2AQyKZd/NYHGb0R+1RLqB8NKt3aSFNA=
+github.com/gobars/cmd v0.0.0-20190805053627-b12a1f0df5b0 h1:eA8CX7BAox4KFSAxUgpHsyZc0rqNsEDdFUERPgFSSzc=
+github.com/gobars/cmd v0.0.0-20190805053627-b12a1f0df5b0/go.mod h1:y4ATcJLNdRZk/9ex76986LU8ZB4yaPq08XoWhXU9z88=
 github.com/golang/protobuf v1.3.1/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/google/uuid v1.1.1 h1:Gkbcsh/GbpXz7lPftLA3P6TYMwjCLYm83jiFQZF/3gY=
 github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=

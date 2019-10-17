@@ -4,11 +4,11 @@ go 1.12
 
 require (
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/bingoohuang/cmd v1.0.5
 	github.com/bingoohuang/gou v0.0.0-20190724062522-59c35e658334
 	github.com/docker/go-units v0.4.0
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/go-openapi/strfmt v0.19.0 // indirect
+	github.com/gobars/cmd v0.0.0-20190805053627-b12a1f0df5b0
 	github.com/jedib0t/go-pretty v4.2.0+incompatible
 	github.com/mattn/go-runewidth v0.0.4 // indirect
 	github.com/shirou/gopsutil v2.18.12+incompatible

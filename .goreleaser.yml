@@ -10,9 +10,12 @@ builds:
   -
     main: ./cmd/sysinfo/main.go
     hooks:
-      post: upx --brute dist/sysinfo*/sysinfo
+      post: ./upx.sh
+    goarch:
+      - amd64
 env:
   - CGO_ENABLED=0
+
 archives:
 - replacements:
     darwin: Darwin

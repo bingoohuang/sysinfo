@@ -3,9 +3,9 @@ package sysinfo
 import (
 	"regexp"
 
-	"github.com/bingoohuang/cmd"
 	"github.com/bingoohuang/gou/str"
-	"github.com/docker/go-units"
+	units "github.com/docker/go-units"
+	"github.com/gobars/cmd"
 )
 
 type PsAuxItem struct {

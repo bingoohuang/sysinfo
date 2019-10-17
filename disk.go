@@ -3,7 +3,7 @@ package sysinfo
 import (
 	"fmt"
 
-	"github.com/docker/go-units"
+	units "github.com/docker/go-units"
 	"github.com/shirou/gopsutil/disk"
 )
 
