@@ -183,6 +183,8 @@ export GITLAB_TOKEN="YOUR_GL_TOKEN"
 $ git tag -a v0.1.0 -m "First release"
 $ git push origin v0.1.0
 
+$ v=1.5.3; git tag -a v$v -m "v$v"; git push origin v$v;
+
 # run GoReleaser at the root of your repository:
 goreleaser --rm-dist
 ```
@@ -194,4 +196,6 @@ goreleaser --rm-dist
 git tag -d v0.1.0
 # delete remote tag v0.1.0 (eg, GitHub version too)
 git push --delete origin v0.1.0
+
+v=0.1.0; git tag -d v$v; git push --delete origin v$v;
 ```
