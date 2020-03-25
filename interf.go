@@ -7,12 +7,14 @@ import (
 	funk "github.com/thoas/go-funk"
 )
 
+// InterfInfo ...
 type InterfInfo struct {
 	InterfaceName string
 	HardwareAddr  string
 	Addrs         string
 }
 
+// GetInterInfos ...
 func GetInterInfos() ([]InterfInfo, error) {
 	// get interfaces MAC/hardware address
 	interfStats, err := net.Interfaces()

@@ -6,6 +6,7 @@ import (
 	"github.com/shirou/gopsutil/cpu"
 )
 
+// CPUInfo ...
 type CPUInfo struct {
 	PhysicalID string
 	VendorID   string
@@ -34,10 +35,11 @@ cat /proc/cpuinfo| grep "processor"| wc -l
 
 查看CPU信息（型号）
 cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
-
 */
+
+// GetCPUInfo ...
 func GetCPUInfo() ([]CPUInfo, error) {
-	// cpu - get CPU number of cores and speed
+	// cpu - get cpu number of cores and speed
 	cpuStats, err := cpu.Info()
 	if err != nil {
 		return nil, err

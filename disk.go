@@ -7,6 +7,7 @@ import (
 	"github.com/shirou/gopsutil/disk"
 )
 
+// DiskInfo ...
 type DiskInfo struct {
 	Path        string
 	Device      string
@@ -17,6 +18,7 @@ type DiskInfo struct {
 	UsedPercent string
 }
 
+// GetDiskInfos ...
 func GetDiskInfos() ([]DiskInfo, error) {
 	stats, err := disk.Partitions(false)
 	if err != nil {
@@ -45,6 +47,7 @@ func GetDiskInfos() ([]DiskInfo, error) {
 	return diskInfos, nil
 }
 
+// nolint gomnd
 func formatPercent(percent float64) string {
 	up := fmt.Sprintf("%0.2f%%", percent)
 

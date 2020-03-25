@@ -8,6 +8,7 @@ import (
 	"github.com/gobars/cmd"
 )
 
+// PsAuxItem ...
 type PsAuxItem struct {
 	User    string
 	Pid     int
@@ -23,6 +24,7 @@ type PsAuxItem struct {
 	Command string
 }
 
+// PsAuxTop ...
 func PsAuxTop(n int) ([]PsAuxItem, error) {
 	auxItems := make([]PsAuxItem, 0)
 	re := regexp.MustCompile(`\s+`)
@@ -47,6 +49,7 @@ func PsAuxTop(n int) ([]PsAuxItem, error) {
 	return auxItems, status.Error
 }
 
+// PasAuxShell ...
 func PasAuxShell(topN int, heading bool) string {
 	return prefix + str.If(heading, "", noheading) + psAuxTopOpt(topN) + fixedLtime
 }

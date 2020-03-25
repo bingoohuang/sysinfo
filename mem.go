@@ -5,12 +5,14 @@ import (
 	"github.com/shirou/gopsutil/mem"
 )
 
+// MemInfo ...
 type MemInfo struct {
 	Total          string
 	Free           string
 	UsedPercentage string
 }
 
+// GetMemInfo ...
 func GetMemInfo() (*MemInfo, error) {
 	vmStat, err := mem.VirtualMemory()
 	if err != nil {

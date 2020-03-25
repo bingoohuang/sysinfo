@@ -7,13 +7,16 @@ import (
 	"regexp"
 
 	"github.com/bingoohuang/gou/reflec"
+
 	"github.com/jedib0t/go-pretty/table"
 )
 
+// TablePrinter ...
 type TablePrinter struct {
 	dittoMark string
 }
 
+// PrintTable ...
 func PrintTable(showsMap map[string]bool, dittoMark string) {
 	info := GetSysInfo(showsMap)
 
@@ -114,6 +117,7 @@ func (p TablePrinter) dittoMarkRows(rows []table.Row) []table.Row {
 	return rows
 }
 
+// BlankCamel ...
 func BlankCamel(str string) string {
 	blank := regexp.MustCompile("(.)([A-Z][a-z]+)").ReplaceAllString(str, "${1} ${2}")
 	return regexp.MustCompile("([a-z0-9])([A-Z])").ReplaceAllString(blank, "${1} ${2}")

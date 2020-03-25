@@ -7,6 +7,7 @@ import (
 	"github.com/shirou/gopsutil/host"
 )
 
+// HostInfo ...
 type HostInfo struct {
 	Hostname        string
 	Uptime          uint64
@@ -19,6 +20,7 @@ type HostInfo struct {
 	KernelVersion   string
 }
 
+// GetHostInfo ...
 func GetHostInfo() (*HostInfo, error) {
 	// host or machine kernel, uptime, platform Info
 	hostStat, err := host.Info()

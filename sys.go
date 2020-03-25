@@ -2,9 +2,12 @@ package sysinfo
 
 import "runtime"
 
+// ErrorInfo ...
 type ErrorInfo struct {
 	Error string
 }
+
+// SysInfo ...
 type SysInfo struct {
 	OS          string
 	MemInfo     *MemInfo
@@ -16,52 +19,44 @@ type SysInfo struct {
 	Errors      []ErrorInfo `json:",omitempty"`
 }
 
-const (
-	Disk   = "disk"
-	Mem    = "mem"
-	CPU    = "cpu"
-	Host   = "host"
-	Interf = "interf"
-	PS     = "ps"
-)
-
+// GetSysInfo ...
 func GetSysInfo(showsMap map[string]bool) SysInfo {
 	var err error
 
 	errs := make([]ErrorInfo, 0)
 	si := SysInfo{OS: runtime.GOOS}
 
-	if _, ok := showsMap[Disk]; ok {
+	if _, ok := showsMap[("disk")]; ok {
 		if si.DiskInfos, err = GetDiskInfos(); err != nil {
 			errs = append(errs, ErrorInfo{err.Error()})
 		}
 	}
 
-	if _, ok := showsMap[Mem]; ok {
+	if _, ok := showsMap[("mem")]; ok {
 		if si.MemInfo, err = GetMemInfo(); err != nil {
 			errs = append(errs, ErrorInfo{err.Error()})
 		}
 	}
 
-	if _, ok := showsMap[CPU]; ok {
+	if _, ok := showsMap["cpu"]; ok {
 		if si.CPUInfos, err = GetCPUInfo(); err != nil {
 			errs = append(errs, ErrorInfo{err.Error()})
 		}
 	}
 
-	if _, ok := showsMap[Host]; ok {
+	if _, ok := showsMap[("host")]; ok {
 		if si.HostInfo, err = GetHostInfo(); err != nil {
 			errs = append(errs, ErrorInfo{err.Error()})
 		}
 	}
 
-	if _, ok := showsMap[Interf]; ok {
+	if _, ok := showsMap[("interf")]; ok {
 		if si.InterfInfos, err = GetInterInfos(); err != nil {
 			errs = append(errs, ErrorInfo{err.Error()})
 		}
 	}
 
-	if _, ok := showsMap[PS]; ok {
+	if _, ok := showsMap[("ps")]; ok {
 		if si.PsItems, err = PsAuxTop(0); err != nil {
 			errs = append(errs, ErrorInfo{err.Error()})
 		}

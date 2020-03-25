@@ -4,15 +4,12 @@ go 1.12
 
 require (
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/bingoohuang/gou v0.0.0-20190724062522-59c35e658334
+	github.com/bingoohuang/gou v0.0.0-20200225004418-9b3655665c46
+	github.com/bingoohuang/strcase v0.0.0-20200312105414-ac2c85cfc85d // indirect
 	github.com/docker/go-units v0.4.0
 	github.com/go-ole/go-ole v1.2.4 // indirect
-	github.com/go-openapi/strfmt v0.19.0 // indirect
-	github.com/gobars/cmd v0.0.0-20190805053627-b12a1f0df5b0
-	github.com/jedib0t/go-pretty v4.2.0+incompatible
-	github.com/mattn/go-runewidth v0.0.4 // indirect
-	github.com/shirou/gopsutil v2.18.12+incompatible
-	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
-	github.com/thoas/go-funk v0.4.0
-	golang.org/x/sys v0.0.0-20190602015325-4c4f7f33c9ed // indirect
+	github.com/gobars/cmd v0.0.0-20191114090003-c6a602977f49
+	github.com/jedib0t/go-pretty v4.3.0+incompatible
+	github.com/shirou/gopsutil v2.20.2+incompatible
+	github.com/thoas/go-funk v0.6.0
 )
