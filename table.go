@@ -2,6 +2,7 @@ package sysinfo
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"reflect"
 	"regexp"
@@ -14,13 +15,18 @@ import (
 // TablePrinter ...
 type TablePrinter struct {
 	dittoMark string
+	Out       io.Writer
 }
 
 // PrintTable ...
-func PrintTable(showsMap map[string]bool, dittoMark string) {
+func PrintTable(showsMap map[string]bool, dittoMark string, out io.Writer) {
 	info := GetSysInfo(showsMap)
 
-	p := TablePrinter{dittoMark: dittoMark}
+	p := TablePrinter{dittoMark: dittoMark, Out: out}
+
+	if p.Out == nil {
+		p.Out = os.Stdout
+	}
 
 	p.table(info.HostInfo)
 	p.table(info.MemInfo)
@@ -88,7 +94,7 @@ func createHeader(fields []reflec.StructField, header *table.Row) {
 
 func (p TablePrinter) tableRender(header table.Row, rows ...table.Row) {
 	t := table.NewWriter()
-	t.SetOutputMirror(os.Stdout)
+	t.SetOutputMirror(p.Out)
 	t.AppendHeader(header)
 
 	if p.dittoMark != "" {

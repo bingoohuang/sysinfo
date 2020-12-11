@@ -26,7 +26,7 @@ func main() {
 
 	switch *format {
 	case "table":
-		sysinfo.PrintTable(showsMap, *ditto)
+		sysinfo.PrintTable(showsMap, *ditto, os.Stdout)
 	case "json":
 		fallthrough
 	default:
