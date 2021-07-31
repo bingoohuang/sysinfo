@@ -3,10 +3,10 @@ package sysinfo
 import (
 	"strconv"
 
-	"github.com/bingoohuang/gou/str"
+	"github.com/bingoohuang/gg/pkg/ss"
 )
 
-func psAuxTopOpt(n int) string { return str.If(n > 0, `|head -n `+strconv.Itoa(n), ``) }
+func psAuxTopOpt(n int) string { return ss.If(n > 0, `|head -n `+strconv.Itoa(n), ``) }
 
 const prefix = `(export TZ=UTC0 LC_ALL=C; ps axo lstart,user,pid,ppid,pcpu,pmem,vsz,rss,tt,stat,time,args`
 const noheading = `|tail -n +2`

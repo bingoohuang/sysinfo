@@ -1,13 +1,12 @@
 package sysinfo
 
 import (
+	"github.com/bingoohuang/gg/pkg/ss"
 	"strconv"
-
-	"github.com/bingoohuang/gou/str"
 )
 
 func psAuxTopOpt(n int) string {
-	return str.If(n > 0, ` --sort=-pcpu|head -n `+strconv.Itoa(n), ` --sort=-pid --forest`)
+	return ss.If(n > 0, ` --sort=-pcpu|head -n `+strconv.Itoa(n), ` --sort=-pid --forest`)
 }
 
 const prefix = `ps axo lstart,user,pid,ppid,pcpu,pmem,vsz,rss,tname,stat,time,args`

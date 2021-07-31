@@ -1,10 +1,10 @@
 package sysinfo
 
 import (
+	"github.com/bingoohuang/gg/pkg/man"
+	"github.com/bingoohuang/gg/pkg/ss"
 	"regexp"
 
-	"github.com/bingoohuang/gou/str"
-	units "github.com/docker/go-units"
 	"github.com/gobars/cmd"
 )
 
@@ -32,12 +32,12 @@ func PsAuxTop(n int) ([]PsAuxItem, error) {
 		f := re.Split(line, 13)
 		auxItems = append(auxItems, PsAuxItem{
 			User:    f[2],
-			Pid:     str.ParseInt(f[3]),
-			Ppid:    str.ParseInt(f[4]),
-			CPU:     str.ParseFloat32(f[5]),
-			Mem:     str.ParseFloat32(f[6]),
-			Vsz:     units.BytesSize(str.ParseFloat64(f[7])),
-			Rss:     units.BytesSize(str.ParseFloat64(f[8])),
+			Pid:     ss.ParseInt(f[3]),
+			Ppid:    ss.ParseInt(f[4]),
+			CPU:     ss.ParseFloat32(f[5]),
+			Mem:     ss.ParseFloat32(f[6]),
+			Vsz:     man.Bytes(ss.ParseUint64(f[7])),
+			Rss:     man.Bytes(ss.ParseUint64(f[8])),
 			Tty:     f[9],
 			Stat:    f[10],
 			Start:   f[0] + ` ` + f[1],
@@ -51,5 +51,5 @@ func PsAuxTop(n int) ([]PsAuxItem, error) {
 
 // PasAuxShell ...
 func PasAuxShell(topN int, heading bool) string {
-	return prefix + str.If(heading, "", noheading) + psAuxTopOpt(topN) + fixedLtime
+	return prefix + ss.If(heading, "", noheading) + psAuxTopOpt(topN) + fixedLtime
 }

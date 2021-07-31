@@ -4,7 +4,7 @@ import (
 	"time"
 
 	units "github.com/docker/go-units"
-	"github.com/shirou/gopsutil/host"
+	"github.com/shirou/gopsutil/v3/host"
 )
 
 // HostInfo ...

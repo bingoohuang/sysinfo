@@ -3,7 +3,7 @@ package sysinfo
 import (
 	"strings"
 
-	"github.com/shirou/gopsutil/net"
+	"github.com/shirou/gopsutil/v3/net"
 	funk "github.com/thoas/go-funk"
 )
 
