@@ -1,8 +1,9 @@
 package sysinfo
 
 import (
-	"github.com/bingoohuang/gg/pkg/ss"
 	"strconv"
+
+	"github.com/bingoohuang/gg/pkg/ss"
 )
 
 func psAuxTopOpt(n int) string {

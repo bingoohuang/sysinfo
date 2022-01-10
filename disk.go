@@ -47,7 +47,6 @@ func GetDiskInfos() ([]DiskInfo, error) {
 	return diskInfos, nil
 }
 
-// nolint gomnd
 func formatPercent(percent float64) string {
 	up := fmt.Sprintf("%0.2f%%", percent)
 

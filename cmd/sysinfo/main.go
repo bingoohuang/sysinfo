@@ -5,7 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/bingoohuang/gou/enc"
+	"github.com/bingoohuang/gg/pkg/codec"
+
 	"github.com/bingoohuang/sysinfo"
 )
 
@@ -30,7 +31,7 @@ func main() {
 	case "json":
 		fallthrough
 	default:
-		b := enc.JSONPretty(sysinfo.GetSysInfo(showsMap))
-		_, _ = os.Stdout.WriteString(b)
+		b := codec.Json(sysinfo.GetSysInfo(showsMap))
+		_, _ = os.Stdout.Write(b)
 	}
 }

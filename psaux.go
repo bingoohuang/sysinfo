@@ -1,9 +1,10 @@
 package sysinfo
 
 import (
+	"regexp"
+
 	"github.com/bingoohuang/gg/pkg/man"
 	"github.com/bingoohuang/gg/pkg/ss"
-	"regexp"
 
 	"github.com/gobars/cmd"
 )

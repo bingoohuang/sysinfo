@@ -30,7 +30,9 @@ func PrintTable(showsMap map[string]bool, dittoMark string, out io.Writer) {
 
 	p.table(info.HostInfo)
 	p.table(info.MemInfo)
-	p.table(info.CPUInfos)
+	cpuInfos := info.CPUInfos
+
+	p.table(cpuInfos)
 	p.table(info.DiskInfos)
 	p.table(info.InterfInfos)
 	p.table(info.PsItems)

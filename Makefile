@@ -23,6 +23,12 @@ install: proxy
 	ls -lh ~/go/bin/$(APPNAME)
 	upx ~/go/bin/$(APPNAME)
 	ls -lh ~/go/bin/$(APPNAME)
+linux: proxy
+	GOOS=linux GOARCH=amd64 go install -ldflags="-s -w" ./...
+	upx ~/go/bin/linux_amd64/$(APPNAME)
+arm: proxy
+	GOOS=linux GOARCH=arm64 go install -ldflags="-s -w" ./...
+	upx ~/go/bin/linux_arm64/$(APPNAME)
 package: install
 	mv ~/go/bin/$(APPNAME) ~/go/bin/$(APPNAME)-$(VERSION)-darwin-amd64
 	gzip -f ~/go/bin/$(APPNAME)-$(VERSION)-darwin-amd64

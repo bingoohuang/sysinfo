@@ -16,6 +16,15 @@ type CPUInfo struct {
 	Mhz        float64
 }
 
+// CPUInfoKey ...
+type CPUInfoKey struct {
+	PhysicalID string
+	VendorID   string
+	Family     string
+	ModelName  string
+	Mhz        float64
+}
+
 /**
 GetCPUInfo 获得CPU信息
 https://www.cnblogs.com/emanlee/p/3587571.html
@@ -45,10 +54,7 @@ func GetCPUInfo() ([]CPUInfo, error) {
 		return nil, err
 	}
 
-	cpuInfos := make([]CPUInfo, 0, len(cpuStats))
-	sort.Slice(cpuInfos, func(i, j int) bool {
-		return cpuInfos[i].PhysicalID < cpuInfos[j].PhysicalID
-	})
+	cpuInfosMap := map[CPUInfoKey]int{}
 
 	physicalMap := make(map[string]int)
 
@@ -60,19 +66,38 @@ func GetCPUInfo() ([]CPUInfo, error) {
 			}
 		}
 
-		cpuInfos = append(cpuInfos, CPUInfo{
+		key := CPUInfoKey{
 			PhysicalID: cpuStat.PhysicalID,
 			VendorID:   cpuStat.VendorID,
 			Family:     cpuStat.Family,
 			ModelName:  cpuStat.ModelName,
-			Cores:      int(cpuStat.Cores),
 			Mhz:        cpuStat.Mhz,
-		})
+		}
+		if _, ok := cpuInfosMap[key]; ok {
+			cpuInfosMap[key] += int(cpuStat.Cores)
+		} else {
+			cpuInfosMap[key] = int(cpuStat.Cores)
+		}
 
 		if cpuStat.PhysicalID != "" {
 			physicalMap[cpuStat.PhysicalID] = int(cpuStat.Cores)
 		}
 	}
+
+	var cpuInfos []CPUInfo
+	for k, v := range cpuInfosMap {
+		cpuInfos = append(cpuInfos, CPUInfo{
+			PhysicalID: k.PhysicalID,
+			VendorID:   k.VendorID,
+			Family:     k.Family,
+			ModelName:  k.ModelName,
+			Mhz:        k.Mhz,
+			Cores:      v,
+		})
+	}
+	sort.Slice(cpuInfos, func(i, j int) bool {
+		return cpuInfos[i].PhysicalID < cpuInfos[j].PhysicalID
+	})
 
 	for i, c := range cpuInfos {
 		if c.PhysicalID != "" {
