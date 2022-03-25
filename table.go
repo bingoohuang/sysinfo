@@ -9,20 +9,21 @@ import (
 
 	"github.com/bingoohuang/gou/reflec"
 
-	"github.com/jedib0t/go-pretty/table"
+	"github.com/jedib0t/go-pretty/v6/table"
 )
 
 // TablePrinter ...
 type TablePrinter struct {
 	dittoMark string
 	Out       io.Writer
+	Format    string
 }
 
 // PrintTable ...
-func PrintTable(showsMap map[string]bool, dittoMark string, out io.Writer) {
+func PrintTable(showsMap map[string]bool, dittoMark string, out io.Writer, format string) {
 	info := GetSysInfo(showsMap)
 
-	p := TablePrinter{dittoMark: dittoMark, Out: out}
+	p := TablePrinter{dittoMark: dittoMark, Out: out, Format: format}
 
 	if p.Out == nil {
 		p.Out = os.Stdout
@@ -105,7 +106,12 @@ func (p TablePrinter) tableRender(header table.Row, rows ...table.Row) {
 		t.AppendRows(rows)
 	}
 
-	t.Render()
+	switch p.Format {
+	case "markdown":
+		t.RenderMarkdown()
+	default:
+		t.Render()
+	}
 }
 
 func (p TablePrinter) dittoMarkRows(rows []table.Row) []table.Row {

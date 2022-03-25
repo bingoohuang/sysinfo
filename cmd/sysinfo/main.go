@@ -12,7 +12,7 @@ import (
 
 func main() {
 	show := flag.String("show", "host,mem,cpu,disk,interf", "only show specified info(host,mem,cpu,disk,interf,ps)")
-	format := flag.String("format", "table", "display format json/table")
+	format := flag.String("format", "table", "display format json/table/markdown")
 	ditto := flag.String("ditto", `"`, "ditto mark (same as above")
 	flag.Parse()
 
@@ -26,8 +26,8 @@ func main() {
 	}
 
 	switch *format {
-	case "table":
-		sysinfo.PrintTable(showsMap, *ditto, os.Stdout)
+	case "table", "markdown":
+		sysinfo.PrintTable(showsMap, *ditto, os.Stdout, *format)
 	case "json":
 		fallthrough
 	default:
