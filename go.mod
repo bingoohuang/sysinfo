@@ -3,7 +3,7 @@ module github.com/bingoohuang/sysinfo
 go 1.18
 
 require (
-	github.com/bingoohuang/gg v0.0.0-20220324042648-3df984c35939
+	github.com/bingoohuang/gg v0.0.0-20220527075033-53c4f07e0da6
 	github.com/bingoohuang/gou v0.0.0-20210727012756-4873089fc9df
 	github.com/docker/go-units v0.4.0
 	github.com/gobars/cmd v0.0.0-20210215022658-cd78beda9673

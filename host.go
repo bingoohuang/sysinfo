@@ -1,12 +1,14 @@
 package sysinfo
 
 import (
+	"runtime"
 	"time"
 
 	"github.com/gobars/cmd"
 
 	units "github.com/docker/go-units"
 	"github.com/shirou/gopsutil/v3/host"
+	"github.com/shirou/gopsutil/v3/mem"
 )
 
 // HostInfo ...
@@ -22,6 +24,8 @@ type HostInfo struct {
 	KernelVersion   string
 	KernelArch      string
 	OsRelease       string
+	NumCPU          int
+	MemAvailable    string
 }
 
 // GetHostInfo ...
@@ -41,6 +45,11 @@ func GetHostInfo() (*HostInfo, error) {
 		return true
 	})
 
+	vmStat, err := mem.VirtualMemory()
+	if err != nil {
+		return nil, err
+	}
+
 	return &HostInfo{
 		Hostname:        hostStat.Hostname,
 		Uptime:          hostStat.Uptime,
@@ -53,5 +62,8 @@ func GetHostInfo() (*HostInfo, error) {
 		PlatformVersion: hostStat.PlatformVersion,
 		KernelArch:      hostStat.KernelArch,
 		KernelVersion:   hostStat.KernelVersion,
+		NumCPU:          runtime.NumCPU(),
+		MemAvailable: units.BytesSize(float64(vmStat.Available)) + "/" + units.BytesSize(float64(vmStat.Total)) +
+			", " + formatPercent(float64(vmStat.Available)/float64(vmStat.Total)),
 	}, nil
 }
