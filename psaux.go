@@ -43,7 +43,8 @@ func PsAuxTop(n int) ([]PsAuxItem, error) {
 			Stat:    f[10],
 			Start:   f[0] + ` ` + f[1],
 			Time:    f[11],
-			Command: f[12]})
+			Command: f[12],
+		})
 		return true
 	})
 

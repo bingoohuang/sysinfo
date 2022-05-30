@@ -10,8 +10,10 @@ func psAuxTopOpt(n int) string {
 	return ss.If(n > 0, ` --sort=-pcpu|head -n `+strconv.Itoa(n), ` --sort=-pid --forest`)
 }
 
-const prefix = `ps axo lstart,user,pid,ppid,pcpu,pmem,vsz,rss,tname,stat,time,args`
-const noheading = ` --no-heading`
+const (
+	prefix    = `ps axo lstart,user,pid,ppid,pcpu,pmem,vsz,rss,tname,stat,time,args`
+	noheading = ` --no-heading`
+)
 
 // nolint
 const fixedLtime = `|awk '{c="date -d\""$1 FS $2 FS $3 FS $4 FS $5"\" +\047%Y-%m-%d %H:%M:%S\047"; c|getline d; close(c); $1=$2=$3=$4=$5=""; printf "%s\n",d$0 }'`
