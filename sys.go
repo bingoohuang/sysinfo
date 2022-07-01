@@ -9,14 +9,14 @@ type ErrorInfo struct {
 
 // SysInfo ...
 type SysInfo struct {
-	OS          string
-	MemInfo     *MemInfo
-	DiskInfos   []DiskInfo
-	CPUInfos    []CPUInfo
-	HostInfo    *HostInfo
-	InterfInfos []InterfInfo
-	PsItems     []PsAuxItem
-	Errors      []ErrorInfo `json:",omitempty"`
+	OS          string       `json:",omitempty"`
+	MemInfo     *MemInfo     `json:",omitempty"`
+	DiskInfos   []DiskInfo   `json:",omitempty"`
+	CPUInfos    []CPUInfo    `json:",omitempty"`
+	HostInfo    *HostInfo    `json:",omitempty"`
+	InterfInfos []InterfInfo `json:",omitempty"`
+	PsItems     []PsAuxItem  `json:",omitempty"`
+	Errors      []ErrorInfo  `json:",omitempty"`
 }
 
 // GetSysInfo ...
