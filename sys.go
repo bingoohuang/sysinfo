@@ -1,6 +1,10 @@
 package sysinfo
 
-import "runtime"
+import (
+	"runtime"
+
+	"github.com/klauspost/cpuid/v2"
+)
 
 // ErrorInfo ...
 type ErrorInfo struct {
@@ -9,14 +13,15 @@ type ErrorInfo struct {
 
 // SysInfo ...
 type SysInfo struct {
-	OS          string       `json:",omitempty"`
-	MemInfo     *MemInfo     `json:",omitempty"`
-	DiskInfos   []DiskInfo   `json:",omitempty"`
-	CPUInfos    []CPUInfo    `json:",omitempty"`
-	HostInfo    *HostInfo    `json:",omitempty"`
-	InterfInfos []InterfInfo `json:",omitempty"`
-	PsItems     []PsAuxItem  `json:",omitempty"`
-	Errors      []ErrorInfo  `json:",omitempty"`
+	OS        string     `json:",omitempty"`
+	MemInfo   *MemInfo   `json:",omitempty"`
+	DiskInfos []DiskInfo `json:",omitempty"`
+	// CPUInfos    []CPUInfo      `json:",omitempty"`
+	CPUInfo     *cpuid.CPUInfo `json:",omitempty"`
+	HostInfo    *HostInfo      `json:",omitempty"`
+	InterfInfos []InterfInfo   `json:",omitempty"`
+	PsItems     []PsAuxItem    `json:",omitempty"`
+	Errors      []ErrorInfo    `json:",omitempty"`
 }
 
 // GetSysInfo ...
@@ -39,9 +44,11 @@ func GetSysInfo(showsMap map[string]bool) SysInfo {
 	}
 
 	if _, ok := showsMap["cpu"]; ok {
-		if si.CPUInfos, err = GetCPUInfo(); err != nil {
-			errs = append(errs, ErrorInfo{err.Error()})
-		}
+		//if si.CPUInfos, err = GetCPUInfo(); err != nil {
+		//	errs = append(errs, ErrorInfo{err.Error()})
+		//}
+
+		si.CPUInfo = &cpuid.CPU
 	}
 
 	if _, ok := showsMap[("host")]; ok {

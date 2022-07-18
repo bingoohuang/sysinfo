@@ -1,6 +1,7 @@
 package sysinfo
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"os"
@@ -8,7 +9,6 @@ import (
 	"regexp"
 
 	"github.com/bingoohuang/gou/reflec"
-
 	"github.com/jedib0t/go-pretty/v6/table"
 )
 
@@ -31,9 +31,7 @@ func PrintTable(showsMap map[string]bool, dittoMark string, out io.Writer, forma
 
 	p.table(info.HostInfo)
 	p.table(info.MemInfo)
-	cpuInfos := info.CPUInfos
-
-	p.table(cpuInfos)
+	p.table(info.CPUInfo)
 	p.table(info.DiskInfos)
 	p.table(info.InterfInfos)
 	p.table(info.PsItems)
@@ -83,7 +81,17 @@ func createRow(fields []reflec.StructField, rowIndex int, v reflect.Value, rows 
 	row = append(row, rowIndex+1)
 
 	for _, f := range fields {
-		row = append(row, v.Field(f.Index).Interface())
+		if !IsCapital(f.Name) {
+			continue
+		}
+
+		val := v.Field(f.Index).Interface()
+		if f.Kind == reflect.Struct {
+			j, _ := json.Marshal(val)
+			val = string(j)
+		}
+
+		row = append(row, val)
 	}
 
 	*rows = append(*rows, row)
@@ -91,8 +99,18 @@ func createRow(fields []reflec.StructField, rowIndex int, v reflect.Value, rows 
 
 func createHeader(fields []reflec.StructField, header *table.Row) {
 	for _, f := range fields {
-		*header = append(*header, BlankCamel(f.Name))
+		if IsCapital(f.Name) {
+			*header = append(*header, BlankCamel(f.Name))
+		}
 	}
+}
+
+func IsCapital(s string) bool {
+	if len(s) == 0 {
+		return false
+	}
+	c := s[0]
+	return c >= 'A' && c <= 'Z'
 }
 
 func (p TablePrinter) tableRender(header table.Row, rows ...table.Row) {
