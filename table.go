@@ -3,13 +3,12 @@ package sysinfo
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/bingoohuang/gou/reflec"
+	"github.com/jedib0t/go-pretty/v6/table"
 	"io"
 	"os"
 	"reflect"
 	"regexp"
-
-	"github.com/bingoohuang/gou/reflec"
-	"github.com/jedib0t/go-pretty/v6/table"
 )
 
 // TablePrinter ...
@@ -31,7 +30,8 @@ func PrintTable(showsMap map[string]bool, dittoMark string, out io.Writer, forma
 
 	p.table(info.HostInfo)
 	p.table(info.MemInfo)
-	p.table(info.CPUInfo)
+	p.table(info.CPUInfos)
+	p.table(info.CPU)
 	p.table(info.DiskInfos)
 	p.table(info.InterfInfos)
 	p.table(info.PsItems)
