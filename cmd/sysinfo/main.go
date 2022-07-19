@@ -26,9 +26,9 @@ func main() {
 	}
 
 	switch *format {
-	case "table", "markdown":
+	case "table", "markdown", "md":
 		sysinfo.PrintTable(showsMap, *ditto, os.Stdout, *format)
-	case "json":
+	case "json", "js":
 		fallthrough
 	default:
 		b := codec.Json(sysinfo.GetSysInfo(showsMap))

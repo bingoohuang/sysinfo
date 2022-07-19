@@ -125,7 +125,7 @@ func (p TablePrinter) tableRender(header table.Row, rows ...table.Row) {
 	}
 
 	switch p.Format {
-	case "markdown":
+	case "markdown", "md":
 		t.RenderMarkdown()
 	default:
 		t.Render()
