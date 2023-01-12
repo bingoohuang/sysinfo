@@ -3,12 +3,13 @@ package sysinfo
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/bingoohuang/gou/reflec"
-	"github.com/jedib0t/go-pretty/v6/table"
 	"io"
 	"os"
 	"reflect"
 	"regexp"
+
+	"github.com/bingoohuang/gou/reflec"
+	"github.com/jedib0t/go-pretty/v6/table"
 )
 
 // TablePrinter ...

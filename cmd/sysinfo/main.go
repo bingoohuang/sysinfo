@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	"github.com/bingoohuang/gg/pkg/codec"
-
 	"github.com/bingoohuang/sysinfo"
 )
 

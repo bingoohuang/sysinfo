@@ -1,16 +1,18 @@
 module github.com/bingoohuang/sysinfo
 
-go 1.18
+go 1.19
+
+replace github.com/shirou/gopsutil/v3 => ../gopsutil
 
 require (
-	github.com/bingoohuang/gg v0.0.0-20220527075033-53c4f07e0da6
+	github.com/bingoohuang/gg v0.0.0-20230105015225-9f479171b5a4
 	github.com/bingoohuang/gou v0.0.0-20210727012756-4873089fc9df
-	github.com/docker/go-units v0.4.0
+	github.com/docker/go-units v0.5.0
 	github.com/gobars/cmd v0.0.0-20210215022658-cd78beda9673
-	github.com/jedib0t/go-pretty/v6 v6.3.0
-	github.com/klauspost/cpuid/v2 v2.1.0
-	github.com/shirou/gopsutil/v3 v3.21.10
-	github.com/thoas/go-funk v0.9.2
+	github.com/jedib0t/go-pretty/v6 v6.4.4
+	github.com/klauspost/cpuid/v2 v2.2.3
+	github.com/shirou/gopsutil/v3 v3.0.0-00010101000000-000000000000
+	github.com/thoas/go-funk v0.9.3
 )
 
 require (
@@ -46,10 +48,8 @@ require (
 	github.com/tklauser/go-sysconf v0.3.9 // indirect
 	github.com/tklauser/numcpus v0.3.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
-	golang.org/x/sys v0.0.0-20220704084225-05e143d24a9e // indirect
-	golang.org/x/text v0.3.6 // indirect
+	golang.org/x/sys v0.3.0 // indirect
+	golang.org/x/text v0.5.0 // indirect
 	gopkg.in/ini.v1 v1.62.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
-
-replace github.com/shirou/gopsutil/v3 => ../gopsutil

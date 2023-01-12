@@ -5,7 +5,6 @@ import (
 
 	"github.com/bingoohuang/gg/pkg/man"
 	"github.com/bingoohuang/gg/pkg/ss"
-
 	"github.com/gobars/cmd"
 )
 

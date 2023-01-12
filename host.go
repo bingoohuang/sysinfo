@@ -4,9 +4,9 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/gobars/cmd"
-
+	"github.com/bingoohuang/gg/pkg/goip"
 	units "github.com/docker/go-units"
+	"github.com/gobars/cmd"
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/host"
 	"github.com/shirou/gopsutil/v3/mem"
@@ -14,6 +14,7 @@ import (
 
 // HostInfo ...
 type HostInfo struct {
+	Ips             []string
 	Hostname        string
 	Uptime          uint64
 	UptimeHuman     string
@@ -53,7 +54,9 @@ func GetHostInfo() (*HostInfo, error) {
 		return nil, err
 	}
 
+	_, ips := goip.MainIP()
 	hi := &HostInfo{
+		Ips:             ips,
 		Hostname:        hostStat.Hostname,
 		Uptime:          hostStat.Uptime,
 		UptimeHuman:     units.HumanDuration(time.Duration(hostStat.Uptime) * time.Second),
