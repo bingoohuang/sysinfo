@@ -11,10 +11,6 @@ import (
 // PsAuxItem ...
 type PsAuxItem struct {
 	User    string
-	Pid     int
-	Ppid    int
-	CPU     float32
-	Mem     float32
 	Vsz     string
 	Rss     string
 	Tty     string
@@ -22,6 +18,10 @@ type PsAuxItem struct {
 	Start   string
 	Time    string
 	Command string
+	Pid     int
+	Ppid    int
+	CPU     float32
+	Mem     float32
 }
 
 // PsAuxTop ...
