@@ -14,20 +14,20 @@ import (
 
 // HostInfo ...
 type HostInfo struct {
+	NumCPU          int
 	MemAvailable    string
+	OS              string
+	KernelArch      string
 	Platform        string
 	CpuModel        string
+	KernelVersion   string
+	Ips             []string
 	UptimeHuman     string
 	PlatformVersion string
-	OS              string
 	Hostname        string
 	HostID          string
 	OsRelease       string
-	KernelVersion   string
-	KernelArch      string
-	Ips             []string
 	Procs           uint64
-	NumCPU          int
 	CpuMhz          float64
 	Uptime          uint64
 }
